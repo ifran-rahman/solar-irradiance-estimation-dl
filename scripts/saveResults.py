@@ -76,3 +76,35 @@ def saveLossDiagram(num_epochs,losses,result_dir):
     plt.legend(fontsize=25)
     plt.savefig(result_dir+'/model_loss.png')
     plt.show()
+
+
+def observedvsPredicted(result_dir, targets, outputs):
+    t_len =int(len(targets)/12) 
+    o_len = int(len(outputs)/12)
+
+    # Extract the values from the tensors
+    # Create a list of index positions (x-values)
+    indices_t = list(range(t_len))  
+    indices_o = list(range(o_len))
+
+    # Create a plot
+    plt.figure(figsize=(40, 10))  # Adjust the figure size as needed
+
+    # Plot the values against their index positions
+    plt.plot(indices_t, targets[0:t_len], marker='o', linestyle='-', color='blue')
+    plt.plot(indices_o, outputs[0:o_len], marker='o', linestyle='-', color='red')
+
+    # Add labels and a title
+    plt.ylabel('Value', fontsize=25)  # Adjust fontsize for ylabel
+    plt.title('Observed and predicted values', fontsize=25)  # Adjust fontsize for title
+
+    # Increase Legend Size
+    plt.legend(labels=['Observed', 'Predicted'], fontsize=25)
+    plt.subplots_adjust(bottom=0.15)
+    # Increase Xticks and Yticks Size
+    plt.xticks(fontsize=25)  # Set the fontsize for xticks
+    plt.yticks(fontsize=25)  # Set the fontsize for yticks
+
+    # Save and display the plot
+    plt.savefig(os.path.join(result_dir,'performance.png'))
+    plt.show()
