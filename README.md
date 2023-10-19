@@ -5,7 +5,7 @@ All codes are written in python.
 
 * `main.ipynb` Trains the model. Consists of Data Loaders, Model, Training and Evaluation cells. Uses the scrips stored in the `.scripts/` folder
 
-* `prepareDs.ipynb` Prepares the dataset in a trainale format.
+* `prepareDs.ipynb` Prepares the dataset in a trainbale format.
 ### .scripts/
 * `saveResults.py` Calculates loss, Creates results folder for particular training based on hyperparameters and time, Saves the results and diagrams.
 
