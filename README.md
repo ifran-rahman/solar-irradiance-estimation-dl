@@ -13,6 +13,8 @@ All codes are written in python.
 
 * `saveThermalImage.py` converts grayscale infrared image to thermal image using colormap. Used for the menuscript.
 
+### results
+The output best_model, results and diagrams are stored here.
 
 
 
