@@ -1,6 +1,3 @@
-/dataset
-/filtered_pyranometer.csv
-/infrared
-/images
-/mini_ds
-/mini_ds.csv
+__pycache__/
+.ipynb_checkpoints/
+girasol.csv

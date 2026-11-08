@@ -1,0 +1,17 @@
+# Python 3.10. Versions match the environment that produced the reported results.
+
+# PyTorch: the pinned build targets CUDA 13.0. For another CUDA version (or CPU),
+# install torch/torchvision first from https://pytorch.org/get-started/locally/
+torch==2.11.0
+torchvision==0.26.0
+
+opencv-python-headless==5.0.0.93
+numpy==2.2.6
+pandas==2.3.3
+scikit-learn==1.7.2
+matplotlib==3.10.9
+tqdm==4.70.0
+
+# Running the notebook (interactively or headless via nbconvert)
+ipykernel==7.3.0
+nbconvert==7.17.1
