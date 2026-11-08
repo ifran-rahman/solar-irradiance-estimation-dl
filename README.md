@@ -58,23 +58,6 @@ jupyter nbconvert --to notebook --execute main.ipynb \
 
 The best checkpoint (lowest validation RMSE), the per-epoch validation losses, and the loss curve are written to `result/mobilenet_regression_v2/`.
 
-<details>
-<summary><strong>Training configuration</strong> (click to expand) </summary>
-
-| Setting | Value |
-|---|---|
-| Input size | 80×60 (W×H), 3-channel |
-| Input normalization | mean 0.3938, std 0.0242 |
-| Target scaling | Min-max with training-split min/max (9.27 / 1271.67 W/m²) |
-| Loss | MSE |
-| Optimizer | Adam, LR 1e-4, weight decay 1e-5 |
-| Batch size | 256 |
-| LR schedule | ReduceLROnPlateau on validation RMSE (factor 0.1, patience 2) |
-| Early stopping | Patience 5 on validation RMSE, max 50 epochs |
-| Seed | 42 (deterministic cuDNN, seeded DataLoader workers) |
-
-</details>
-
 ## Results
 
 Metrics are computed in W/m² on the held-out 30% split with the best checkpoint. The same split is also used for early stopping and checkpoint selection. Single seed (42).
@@ -83,7 +66,7 @@ Metrics are computed in W/m² on the held-out 30% split with the best checkpoint
 |---|---|---|---|---|---|
 | MobileNetV2 + linear head (from scratch) | 2.2M | **65.53** | **39.92** | **0.9262** | 25 (early stop) |
 
-Training took about 133 minutes on a single GPU. The executed notebook with full logs is [result/mobilenet_regression_v2/main_run.ipynb](result/mobilenet_regression_v2/main_run.ipynb).
+Training took about 133 minutes on a single RTX 3060. The executed notebook with full logs is [result/mobilenet_regression_v2/main_run.ipynb](result/mobilenet_regression_v2/main_run.ipynb).
 
 <details>
 <summary><strong>Validation loss curve</strong> (click to expand) </summary>
@@ -129,3 +112,7 @@ For questions, please contact ifran.nijhum@ucdconnect.ie.
 
 - Enhancing Intra-Hour Solar Irradiance Estimation through Knowledge Distillation and Infrared Sky Images. [Code](https://github.com/ifran-rahman/Solar_Estimation_KD)
 - Enhanced IR images for photovoltaic estimation. [Code](https://github.com/ifran-rahman/Solar_Enhanced_IR)
+
+---
+
+<sub><b>Note on data and experimental setup.</b> Full Girasol IR set (498,265 image–irradiance pairs), split chronologically by row order into 70% training (348,785) and 30% held-out (149,480); the held-out split is used for validation, checkpoint selection and the reported metrics. Images are read as 3-channel, resized to 80×60, scaled to [0, 1] and standardized (mean 0.3938, std 0.0242). Irradiance targets are min-max scaled with training-split statistics (9.27–1271.67 W/m²); RMSE, MAE and R² are computed in W/m². MobileNetV2 (random init) + global average pooling + linear head (2.2M params), MSE loss, Adam (LR 1e-4, weight decay 1e-5), batch 256, ReduceLROnPlateau (×0.1, patience 2), early stopping (patience 5, max 50 epochs), seed 42 with deterministic cuDNN, single NVIDIA RTX 3060 (12 GB).</sub>
